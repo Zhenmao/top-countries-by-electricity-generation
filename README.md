@@ -1,4 +1,4 @@
-# [Growing Electricity Generation](https://github.com/Zhenmao/growing-electricty-geneation)
+# [Top 10 Countries by Electricity Generation](https://github.com/Zhenmao/top-countries-by-electricity-generation)
 
 ### References:
 
