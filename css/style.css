@@ -1,0 +1,156 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+}
+
+/* Typography */
+:root {
+  --font-size-sm: clamp(0.8rem, 0.25vi + 0.74rem, 0.94rem);
+  --font-size-base: clamp(1rem, 0.45vi + 0.89rem, 1.25rem);
+  --font-size-md: clamp(1.25rem, 0.76vi + 1.06rem, 1.67rem);
+  --font-size-lg: clamp(1.56rem, 1.2vi + 1.26rem, 2.22rem);
+  --font-size-xl: clamp(1.95rem, 1.83vi + 1.5rem, 2.96rem);
+  --font-size-xxl: clamp(2.44rem, 2.74vi + 1.76rem, 3.95rem);
+  --font-size-xxxl: clamp(3.05rem, 4.02vi + 2.05rem, 5.26rem);
+
+  --font-size-vis-xs: 10px;
+  --font-size-vis-sm: 12px;
+  --font-size-vis-base: 14px;
+
+  --font-family: "Sofia Sans Condensed", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  --line-height-body: 1.5;
+  --line-height-header: 0.85;
+  --line-height-subheader: 1;
+
+  --color-background: #333464;
+  --color-text: #e7e7e7;
+  --color-accent: #01a6af;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-header);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+hgroup p {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-subheader);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+hgroup small {
+  font-size: var(--font-size-base);
+}
+
+footer {
+  font-size: var(--font-size-sm);
+}
+
+.figure {
+  font-size: var(--font-size-vis-base);
+}
+
+/* Layout */
+main {
+  position: relative;
+  margin: 4rem auto;
+  width: min(65rem, 100% - 2rem);
+}
+
+main > * + * {
+  margin-block-start: var(--spacer, 1lh);
+}
+
+@media (width > 30rem) {
+  hgroup {
+    position: absolute;
+  }
+}
+
+/* Visualization */
+.layered-area-chart {
+  display: flex;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.tick__line {
+  stroke: var(--color-text);
+  stroke-opacity: 0.25;
+}
+
+.tick__label {
+  fill: var(--color-text);
+}
+
+.series__area {
+  fill: var(--color-accent);
+  fill-opacity: 0.25;
+}
+
+.series__line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2px;
+}
+
+.series__name {
+  fill: var(--color-text);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.series__label {
+  fill: var(--color-text);
+}
