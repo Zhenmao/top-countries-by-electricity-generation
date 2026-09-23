@@ -70,10 +70,12 @@ export default function layeredAreaChart({ el, data }) {
     };
   });
 
-  const xTicks = xScale3d.domain().map((x) => ({
+  const xTicks = xScale3d.domain().map((x, i) => ({
     pos0: projection3d(x, 0, 0),
-    pos1: projection3d(x, 0, zMaxPx + 8),
-    pos: transformText(...projection3d(x, 0, zMaxPx + 16), "top"),
+    pos1: projection3d(x, 0, zMaxPx + 32),
+    pos: transformText(...projection3d(x, 0, zMaxPx + 32), "top"),
+    textAnchor: i === 0 ? "start" : "end",
+    dx: i === 0 ? 6 : -6,
     text: xTickFormat(x),
   }));
 
@@ -112,8 +114,8 @@ export default function layeredAreaChart({ el, data }) {
   xTickG
     .append("text")
     .attr("class", "tick__label")
-    .attr("text-anchor", "middle")
-    .attr("dy", "0.71em")
+    .attr("text-anchor", (d) => d.textAnchor)
+    .attr("dx", (d) => d.dx)
     .attr("transform", (d) => d.pos)
     .text((d) => d.text);
 
