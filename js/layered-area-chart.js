@@ -11,8 +11,19 @@ export default function layeredAreaChart({ el, data }) {
   const xAccessor = (d) => d.year;
   const yAccessor = (d) => d.value;
   const zAccessor = (d) => d.name;
+  const yChangeAccessor = (values) => {
+    const base = yAccessor(values.at(0));
+    const latest = yAccessor(values.at(-1));
+    return (latest - base) / base;
+  };
+
+  const yChangeDirectionAccessor = (values) => {
+    const yChangeValue = yChangeAccessor(values);
+    return yChangeValue > 0 ? "▲" : yChangeValue < 0 ? "▼" : " ";
+  };
 
   const yValueFormat = d3.format(",d");
+  const yChangeFormat = d3.format(",.0%");
   const xTickFormat = d3.format("d");
 
   const angle3d = Math.PI / 6;
@@ -140,9 +151,23 @@ export default function layeredAreaChart({ el, data }) {
     .append("text")
     .attr("class", "series__name")
     .attr("dx", 6)
-    .attr("dy", "0.32em")
+    .attr("dy", `${-0.2}em`)
     .attr("transform", (d) => transformText(...d.nameLabelPos, "top"))
     .text(zAccessor);
+
+  seriesG
+    .append("text")
+    .attr("class", "series__change")
+    .attr("dx", 6)
+    .attr("dy", `${0.71 + 0.2}em`)
+    .attr("transform", (d) => transformText(...d.nameLabelPos, "top"))
+    .selectChildren()
+    .data((d) => [
+      yChangeDirectionAccessor(d.values),
+      yChangeFormat(yChangeAccessor(d.values)),
+    ])
+    .join("tspan")
+    .text((d) => d);
 
   seriesG
     .append("g")

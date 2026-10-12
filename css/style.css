@@ -151,6 +151,7 @@ main > * + * {
   letter-spacing: 0.1em;
 }
 
+.series__change,
 .series__label {
   fill: var(--color-text);
 }
